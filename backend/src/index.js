@@ -36,19 +36,7 @@ if (process.env.NODE_ENV === "production") {
     });
 }
 
-app._router?.stack.forEach((middleware) => {
-    if (middleware.route) {
-        console.log("➡ Route:", middleware.route.path);
-    } else if (middleware.name === 'router') {
-        middleware.handle.stack.forEach((handler) => {
-            if (handler.route) {
-                console.log("➡ Nested Route:", handler.route.path);
-            }
-        });
-    }
-});
-
 server.listen(PORT, () => {
     console.log("server is running on PORT:" + PORT);
     connectDB();
-}); 
+});
