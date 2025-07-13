@@ -36,7 +36,17 @@ if (process.env.NODE_ENV === "production") {
     });
 }
 
+app._router.stack.forEach((r) => {
+    if (r.route) {
+        console.log(`Registered Route: ${r.route.path}`);
+    } else if (r.name === 'router') {
+        r.handle.stack.forEach((handler) => {
+            console.log(`Nested Route: ${handler.route?.path}`);
+        });
+    }
+});
+
 server.listen(PORT, () => {
     console.log("server is running on PORT:" + PORT);
     connectDB();
-});
+}); 
